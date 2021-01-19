@@ -26,6 +26,7 @@ struct SingleTopicRequest: APIRequest {
     var path: String {
         return "/t/\(id).json"
         ///t/-/\(id).json
+        ///t/\(id).json
     }
     
     var parameters: [String : String] {

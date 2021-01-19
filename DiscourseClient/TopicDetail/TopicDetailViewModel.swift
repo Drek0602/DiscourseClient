@@ -22,7 +22,7 @@ protocol TopicDetailViewDelegate: class {
 class TopicDetailViewModel {
     var labelTopicIDText: String?
     var labelTopicNameText: String?
-    var postsNumbers: String?
+    var labelPostsNumbers: String?
     var possibleDeleteTopic: Bool = false
 
     weak var viewDelegate: TopicDetailViewDelegate?
@@ -42,12 +42,12 @@ class TopicDetailViewModel {
             
             switch result {
                 case .success (let topicResponse):
-                    guard let topic = topicResponse?.topic//let details =
-                            /*topicResponse?.details*/ else {return}
+                    guard let topic = topicResponse?.topic, let details =
+                            topicResponse?.details else {return}
                     self.labelTopicIDText = "\(topic.id)"
                     self.labelTopicNameText = topic.title
-                    //self.postsNumbers = "\(topic.postsCount)"
-                   // self.possibleDeleteTopic = details.canDelete ?? false
+                    self.labelPostsNumbers = "\(topic.postsCount)"
+                    self.possibleDeleteTopic = details.canDelete ?? false
                     
                     self.viewDelegate?.topicDetailFetched()
                     

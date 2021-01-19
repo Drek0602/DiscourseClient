@@ -22,6 +22,12 @@ class TopicDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    lazy var labelTopicPostCount: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     lazy var topicIDStackView: UIStackView = {
         let labelTopicIDTitle = UILabel()
@@ -46,6 +52,18 @@ class TopicDetailViewController: UIViewController {
         topicNameStackView.axis = .horizontal
 
         return topicNameStackView
+    }()
+    
+    lazy var topicPostCountStackView: UIStackView = {
+        let labelTopicNumber = UILabel()
+        labelTopicNumber.text = NSLocalizedString("Topic postCount: ", comment: "")
+        labelTopicNumber.translatesAutoresizingMaskIntoConstraints = false
+
+        let topicPostCountStackView = UIStackView(arrangedSubviews: [labelTopicNumber, labelTopicPostCount])
+        topicPostCountStackView.translatesAutoresizingMaskIntoConstraints = false
+        topicPostCountStackView.axis = .horizontal
+
+        return topicPostCountStackView
     }()
 
     let viewModel: TopicDetailViewModel
@@ -74,6 +92,12 @@ class TopicDetailViewController: UIViewController {
             topicNameStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             topicNameStackView.topAnchor.constraint(equalTo: topicIDStackView.bottomAnchor, constant: 8)
         ])
+        
+        view.addSubview(topicPostCountStackView)
+        NSLayoutConstraint.activate([
+            topicPostCountStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            topicPostCountStackView.topAnchor.constraint(equalTo: topicNameStackView.bottomAnchor, constant: 8)
+        ])
 
         let leftBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
         leftBarButtonItem.tintColor = .black
@@ -97,6 +121,10 @@ class TopicDetailViewController: UIViewController {
     fileprivate func updateUI() {
         labelTopicID.text = viewModel.labelTopicIDText
         labelTopicTitle.text = viewModel.labelTopicNameText
+        labelTopicPostCount.text = viewModel.labelPostsNumbers
+        
+        //inser if statement for delete topic or not
+        
     }
 }
 

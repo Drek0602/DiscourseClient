@@ -36,7 +36,7 @@ struct TopicList: Codable {
 struct Topic: Codable {
     let id: Int
     let title, fancyTitle, slug: String?
-    let postsCount, replyCount, highestPostNumber: Int?
+    let postsCount, replyCount, highestPostNumber: Int
     let imageURL: String?
     let createdAt, lastPostedAt: String?
     let bumped: Bool?
@@ -51,7 +51,7 @@ struct Topic: Codable {
     let lastPosterUsername: String?
     let categoryID: Int?
     let pinnedGlobally: Bool?
-    let posters: [Poster]?
+    
 
     enum CodingKeys: String, CodingKey {
         case id, title
@@ -72,7 +72,7 @@ struct Topic: Codable {
         case lastPosterUsername = "last_poster_username"
         case categoryID = "category_id"
         case pinnedGlobally = "pinned_globally"
-        case posters
+    
     }
 }
 
@@ -81,17 +81,6 @@ enum Archetype: String, Codable {
 }
 
 // MARK: - Poster
-struct Poster: Codable {
-    let extras: Extras?
-    let userID: Int?
-    
-
-    enum CodingKeys: String, CodingKey {
-        case extras
-        case userID = "user_id"
-    }
-}
-
 enum Extras: String, Codable {
     case latest = "latest"
     case latestSingle = "latest single"

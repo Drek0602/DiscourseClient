@@ -8,11 +8,12 @@ struct SingleTopicResponse: Codable {
     let details: TopicDetails
     
     init(from decoder: Decoder) throws {
-        let rootObject = try decoder.singleValueContainer()
-        topic = try rootObject.decode(Topic.self)
+        let rootObj = try decoder.singleValueContainer()
+        topic = try rootObj.decode(Topic.self)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         details = try container.decode(TopicDetails.self, forKey: .details)
+        
     }
     
 }
@@ -31,6 +32,8 @@ struct TopicDetails: Codable {
     }
     
     
-    
+
 }
+
+
 
