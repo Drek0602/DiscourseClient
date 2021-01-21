@@ -26,22 +26,26 @@ struct CreateTopicRequest: APIRequest {
     }
     
     var method: Method {
-        fatalError("Need to implement this")
+        return .POST
     }
     
     var path: String {
-        fatalError("Need to implement this")
+        return "/posts.json"
     }
     
     var parameters: [String : String] {
-        fatalError("Need to implement this")
+        return [:]
     }
     
     var body: [String : Any] {
-        fatalError("Need to implement this")
+        return [
+            "title": title,
+            "raw": raw,
+            "createdAt": createdAt
+        ]
     }
     
     var headers: [String : String] {
-        fatalError("Need to implement this")
+       return [:]
     }
 }

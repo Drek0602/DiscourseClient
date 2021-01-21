@@ -13,6 +13,8 @@
 		027FB60F25B4CC060031CD25 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 027FB60D25B4CC060031CD25 /* CategoryCell.xib */; };
 		027FB61225B4CCE80031CD25 /* CategoriesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FB61125B4CCE80031CD25 /* CategoriesRequest.swift */; };
 		027FB61525B4CD290031CD25 /* CategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027FB61425B4CD290031CD25 /* CategoriesResponse.swift */; };
+		02A2833F25B793D30012147F /* DeleteTopicRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2833E25B793D30012147F /* DeleteTopicRequest.swift */; };
+		02A2834225B794140012147F /* DeleteTopicResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2834125B794140012147F /* DeleteTopicResponse.swift */; };
 		62015CB723EF04C200673EBB /* TopicCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62015CB623EF04C200673EBB /* TopicCellViewModel.swift */; };
 		62015CBA23EF084C00673EBB /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62015CB823EF084C00673EBB /* TopicCell.swift */; };
 		62015CBB23EF084C00673EBB /* TopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62015CB923EF084C00673EBB /* TopicCell.xib */; };
@@ -59,6 +61,8 @@
 		027FB60D25B4CC060031CD25 /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
 		027FB61125B4CCE80031CD25 /* CategoriesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesRequest.swift; sourceTree = "<group>"; };
 		027FB61425B4CD290031CD25 /* CategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResponse.swift; sourceTree = "<group>"; };
+		02A2833E25B793D30012147F /* DeleteTopicRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTopicRequest.swift; sourceTree = "<group>"; };
+		02A2834125B794140012147F /* DeleteTopicResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTopicResponse.swift; sourceTree = "<group>"; };
 		62015CB623EF04C200673EBB /* TopicCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCellViewModel.swift; sourceTree = "<group>"; };
 		62015CB823EF084C00673EBB /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		62015CB923EF084C00673EBB /* TopicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicCell.xib; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				62015CD123EF205100673EBB /* CreateTopicRequest.swift */,
 				62A697A223E89BD600CCEA3E /* LatestTopicsRequest.swift */,
 				027FB61125B4CCE80031CD25 /* CategoriesRequest.swift */,
+				02A2833E25B793D30012147F /* DeleteTopicRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 				62015CD323EF21A900673EBB /* AddNewTopicResponse.swift */,
 				62015CC723EF162D00673EBB /* SingleTopicResponse.swift */,
 				027FB61425B4CD290031CD25 /* CategoriesResponse.swift */,
+				02A2834125B794140012147F /* DeleteTopicResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 				627DC5CF23E604D2006D8615 /* DiscourseClientRemoteDataManager.swift in Sources */,
 				027FB60725B4CB960031CD25 /* CategoriesDataManager.swift in Sources */,
 				627DC5C523E5FEFD006D8615 /* TopicsViewController.swift in Sources */,
+				02A2833F25B793D30012147F /* DeleteTopicRequest.swift in Sources */,
 				627DC5D323E605E5006D8615 /* DiscourseClientRemoteDataManagerImpl.swift in Sources */,
 				62015CBA23EF084C00673EBB /* TopicCell.swift in Sources */,
 				62015CCB23EF19F500673EBB /* UIViewController+Extensions.swift in Sources */,
@@ -383,6 +390,7 @@
 				027FB61225B4CCE80031CD25 /* CategoriesRequest.swift in Sources */,
 				627DC5D823E60727006D8615 /* SessionAPI.swift in Sources */,
 				627DC5D123E604E7006D8615 /* DiscourseClientLocalDataManager.swift in Sources */,
+				02A2834225B794140012147F /* DeleteTopicResponse.swift in Sources */,
 				627DC5AB23E5F580006D8615 /* SceneDelegate.swift in Sources */,
 				627DC5CD23E6048A006D8615 /* DiscourseClientDataManager.swift in Sources */,
 			);

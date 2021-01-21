@@ -117,18 +117,45 @@ class TopicDetailViewController: UIViewController {
         let alertMessage: String = NSLocalizedString("Error fetching topic detail\nPlease try again later", comment: "")
         showAlert(alertMessage)
     }
+    
+    fileprivate func showErrorDeletingTopicDetailAlert() {
+        let alertMessage: String = NSLocalizedString("Error deleting topic\nPlease try again later", comment: "")
+        showAlert(alertMessage)
+    }
+    
+    private func showDeleteOption() {
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteTopic))
+        barButtonItem.tintColor = .red
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    @objc private func deleteTopic() {
+        showDeleteAlert(title: "Delete Topic") { [weak self] in
+            self?.viewModel.deleteTopic()
+        }
+    }
 
     fileprivate func updateUI() {
         labelTopicID.text = viewModel.labelTopicIDText
         labelTopicTitle.text = viewModel.labelTopicNameText
         labelTopicPostCount.text = viewModel.labelPostsNumbers
         
-        //inser if statement for delete topic or not
+        //TODO:insert if statement for delete topic or not
+        if viewModel.possibleDeleteTopic {
+            showDeleteOption()
+            //needs to be checked if this works..
+        }
         
     }
+    
+    
 }
 
 extension TopicDetailViewController: TopicDetailViewDelegate {
+    func errorDeletingTopicDetail() {
+        showErrorDeletingTopicDetailAlert()
+    }
+    
     func topicDetailFetched() {
         updateUI()
     }

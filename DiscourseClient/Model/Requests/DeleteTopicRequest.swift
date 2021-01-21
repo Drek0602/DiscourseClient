@@ -1,17 +1,16 @@
 //
-//  SingleTopicRequest.swift
-//  Eh-Ho
+//  DeleteTopicRequest.swift
+//  DiscourseClient
 //
-//  Created by Ignacio Garcia Sainz on 17/07/2019.
-//  Copyright © 2019 KeepCoding. All rights reserved.
+//  Created by Tim Acosta on 19/1/21.
+//  Copyright © 2021 Roberto Garrido. All rights reserved.
 //
 
 import Foundation
 
-// TODO: Implementar las propiedades de esta request
-struct SingleTopicRequest: APIRequest {
+struct DeleteTopicRequest: APIRequest {
     
-    typealias Response = SingleTopicResponse
+    typealias Response = DeleteTopicResponse
     
     let id: Int
     
@@ -19,13 +18,13 @@ struct SingleTopicRequest: APIRequest {
         self.id = id
     }
     
+    
     var method: Method {
-        return .GET
+        return .DELETE
     }
     
     var path: String {
-        return "/t/\(id).json"
-        
+        return "t/-/\(id).json"
     }
     
     var parameters: [String : String] {
@@ -39,5 +38,6 @@ struct SingleTopicRequest: APIRequest {
     var headers: [String : String] {
         return [:]
     }
+    
 }
 

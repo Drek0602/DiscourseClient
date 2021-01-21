@@ -11,12 +11,14 @@ import Foundation
 /// Delegate que usaremos para comunicar eventos relativos a navegación, al coordinator correspondiente
 protocol TopicDetailCoordinatorDelegate: class {
     func topicDetailBackButtonTapped()
+    func topicDeleted()
 }
 
 /// Delegate para comunicar a la vista cosas relacionadas con UI
 protocol TopicDetailViewDelegate: class {
     func topicDetailFetched()
     func errorFetchingTopicDetail()
+    func errorDeletingTopicDetail()
 }
 
 class TopicDetailViewModel {
@@ -59,6 +61,22 @@ class TopicDetailViewModel {
             
         }
 
+    }
+    
+    func deleteTopic() {
+        topicDetailDataManager.deleteTopic(id: topicID) { [weak self] result in
+            guard let self = self else {return}
+            
+            switch result {
+                case .success:
+                    self.coordinatorDelegate?.topicDeleted()
+                case .failure(let error):
+                    print(error)
+                    self.viewDelegate?.errorDeletingTopicDetail()
+            }
+            
+        }
+        
     }
 
     func backButtonTapped() {

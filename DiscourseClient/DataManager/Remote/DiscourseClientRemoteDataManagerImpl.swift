@@ -38,6 +38,13 @@ class DiscourseClientRemoteDataManagerImpl: DiscourseClientRemoteDataManager {
         }
     }
     
+    func deleteTopic(id: Int, completion: @escaping (Result<DeleteTopicResponse?, Error>) -> ()) {
+        let request = DeleteTopicRequest(id: id)
+        session.send(request: request) { result in
+            completion(result)
+        }
+    }
+    
     func fetchAllCategories(completion: @escaping (Result<CategoriesResponse?, Error>) -> ()) {
         let request = CategoriesRequest()
         session.send(request: request) { result in
