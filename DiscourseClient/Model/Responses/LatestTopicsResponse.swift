@@ -94,7 +94,7 @@ enum Description: String, Codable {
 }
 
 // MARK: - User
-struct User: Codable {
+/*struct User: Codable {
     let id: Int?
     let username, name, avatarTemplate: String?
 
@@ -102,6 +102,6 @@ struct User: Codable {
         case id, username, name
         case avatarTemplate = "avatar_template"
     }
-}
+}*/
 
 
