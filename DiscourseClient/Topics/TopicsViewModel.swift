@@ -33,18 +33,6 @@ class TopicsViewModel {
     }
 
     func viewWasLoaded() {
-        /** TODO:
-         Recuperar el listado de latest topics del dataManager
-         Asignar el resultado a la lista de viewModels (que representan celdas de la interfaz
-         Avisar a la vista de que ya tenemos topics listos para pintar
-         */
-        
-        fetchTopics()
-        
-        
-    }
-    
-    func fetchTopics() {
         topicsDataManager.fetchAllTopics { [weak self] result in
             guard let self = self else {return}
             
@@ -63,7 +51,10 @@ class TopicsViewModel {
                     self.viewDelegate?.errorFetchingTopics()
             }
         }
+        
     }
+    
+  
 
     func numberOfSections() -> Int {
         return 1
@@ -89,6 +80,8 @@ class TopicsViewModel {
 
     func newTopicWasCreated() {
         // TODO: Seguramente debamos recuperar de nuevo los topics del datamanager, y pintarlos de nuevo
+        viewWasLoaded()
+        
         
     }
 }

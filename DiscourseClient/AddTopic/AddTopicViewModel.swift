@@ -32,7 +32,7 @@ class AddTopicViewModel {
         coordinatorDelegate?.addTopicCancelButtonTapped()
     }
 
-    func submitButtonTapped(title: String) {
+    func submitButtonTapped(title: String, raw: String) {
         /** TODO:
          Realizar la llamada addTopic sobre el dataManager.
          Si el resultado es success, avisar al coordinator
@@ -40,7 +40,7 @@ class AddTopicViewModel {
          */
         
         
-        dataManager.addTopic(title: title, raw: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", createdAt: "") { [weak self] result in
+        dataManager.addTopic(title: title, raw:"", createdAt: "") { [weak self] result in
             
             guard let self = self else {return}
             

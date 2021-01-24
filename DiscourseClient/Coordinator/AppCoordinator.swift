@@ -44,6 +44,8 @@ class AppCoordinator: Coordinator {
                                                   addTopicDataManager: dataManager)
         addChildCoordinator(topicsCoordinator)
         topicsCoordinator.start()
+        
+        //--------------------------------------------
 
         let categoriesNavigationController = UINavigationController()
         let categoriesCoordinator = CategoriesCoordinator(presenter: categoriesNavigationController, categoriesDataManager: dataManager)
@@ -51,11 +53,15 @@ class AppCoordinator: Coordinator {
         addChildCoordinator(categoriesCoordinator)
         categoriesCoordinator.start()
         
+        //------------------------------------
+        
         let userNavigationController = UINavigationController()
-        let userCoordinator = UserCoordinator(presenter: userNavigationController, userDataManager: dataManager)
+        let userCoordinator = UserCoordinator(presenter: userNavigationController, usersDataManager: dataManager, userDetailDataManager: dataManager)
         
         addChildCoordinator(userCoordinator)
         userCoordinator.start()
+        
+        //-------------------------------------------
 
         tabBarController.tabBar.tintColor = .black
 

@@ -12,7 +12,14 @@ struct UserRequest: APIRequest {
     
     typealias Response = UserResponse
     
-    //let period
+    let period: Period
+    let order: Order
+    
+    init(period: Period = .yearly, order: Order = .postCount) {
+        
+        self.period = period
+        self.order = order
+    }
     
     var method: Method {
         return .GET
@@ -22,11 +29,11 @@ struct UserRequest: APIRequest {
         return "/directory_items.json"
     }
     
-    //https://discourse.example.com/directory_items.json?period={period}&order={order}
-    //https://mdiscourse.keepcoding.io/directory_items.json?period=weekly&order=likes_received
-    
     var parameters: [String : String] {
-        return [:]
+        return [
+            "period": period.rawValue,
+            "order": order.rawValue
+        ]
     }
     
     var body: [String : Any] {

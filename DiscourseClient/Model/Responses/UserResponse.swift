@@ -8,50 +8,93 @@
 
 import Foundation
 
-// MARK: - UserResponse
 struct UserResponse: Codable {
-    let directoryItems: [DirectoryItem]
-    let totalRowsDirectoryItems: Int
-    let loadMoreDirectoryItems: String
+    let users: Users
 
     enum CodingKeys: String, CodingKey {
-        case directoryItems = "directory_items"
-        case totalRowsDirectoryItems = "total_rows_directory_items"
-        case loadMoreDirectoryItems = "load_more_directory_items"
+        case users = "directory_items"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        users = try container.decode(Users.self, forKey: .users)
     }
 }
 
-// MARK: - DirectoryItem
-struct DirectoryItem: Codable {
-    let id, likesReceived, likesGiven, topicsEntered: Int
-    let topicCount, postCount, postsRead, daysVisited: Int
-    let user: User
+typealias Users = [User]
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case likesReceived = "likes_received"
-        case likesGiven = "likes_given"
-        case topicsEntered = "topics_entered"
-        case topicCount = "topic_count"
-        case postCount = "post_count"
-        case postsRead = "posts_read"
-        case daysVisited = "days_visited"
-        case user
-    }
-}
-
-// MARK: - User
 struct User: Codable {
+    
     let id: Int
     let username: String
     let name: String?
     let avatarTemplate: String
-    let title: String?
-
+    let email: String?
+    let canEdit: Bool?
+    let canEditUsername: Bool?
+    let canEditEmail: Bool?
+    let canEditName: Bool?
+    let ignored: Bool?
+    let muted: Bool?
+    
     enum CodingKeys: String, CodingKey {
-        case id, username, name
+        case userKey = "user"
+        
+        case id, username, name, email, ignored, muted
         case avatarTemplate = "avatar_template"
-        case title
+        case canEdit = "can_edit"
+        case canEditUsername = "can_edit_username"
+        case canEditEmail = "can_edit_email"
+        case canEditName = "can_edit_name"
+    }
+    
+    init(from decoder: Decoder) throws {
+        var container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let rootUser = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: .userKey) {
+            container = rootUser
+        }
+        
+        id = try container.decode(Int.self, forKey: .id)
+        username = try container.decode(String.self, forKey: .username)
+        avatarTemplate = try container.decode(String.self, forKey: .avatarTemplate)
+        email = try container.decodeIfPresent(String.self, forKey: .email)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+        canEdit = try container.decodeIfPresent(Bool.self, forKey: .canEdit)
+        canEditUsername = try container.decodeIfPresent(Bool.self, forKey: .canEditUsername)
+        canEditEmail = try container.decodeIfPresent(Bool.self, forKey: .canEditEmail)
+        canEditName = try container.decodeIfPresent(Bool.self, forKey: .canEditName)
+        ignored = try container.decodeIfPresent(Bool.self, forKey: .ignored)
+        muted = try container.decodeIfPresent(Bool.self, forKey: .muted)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(username, forKey: .username)
     }
 }
+
+enum Period: String {
+    case daily
+    case weekly
+    case monthly
+    case quarterly
+    case yearly
+    case all
+    
+}
+
+enum Order: String {
+    case likesReceived = "likes_received"
+    case likesGiven = "likes_given"
+    case topicCount = "topic_count"
+    case postCount = "post_count"
+    case postsRead = "posts_read"
+    case daysVisited = "days_visited"
+}
+
+
 

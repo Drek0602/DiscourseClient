@@ -23,22 +23,12 @@ extension UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    /*func showDeleteTopic(_ alertMessage: String,
-                         _ alertTitle: String = NSLocalizedString("Delete", comment: ""),
-                         _ alertActionYes: String = NSLocalizedString("Delete", comment: ""),
-                         _ alertActionNo: String = NSLocalizedString("Cancell", comment: "")) {
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: alertActionYes, style: .default, handler: nil))
-        alertController.addAction(UIAlertAction(title: alertActionNo, style: .cancel, handler: nil))
-        present(alertController, animated: true, completion: nil)
-    }*/
-    
     func showDeleteAlert(title: String, onAccept: @escaping () -> Void) {
-        let yesAction = UIAlertAction(title: "Borrar", style: .destructive, handler: { _ in
+        let yesAction = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
             onAccept()
         })
-        let noAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
-        let alert = UIAlertController(title: title, message: "La acción no podrá deshacerse", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let alert = UIAlertController(title: title, message: "The action cannot be reverted", preferredStyle: .alert)
         alert.addAction(noAction)
         alert.addAction(yesAction)
         

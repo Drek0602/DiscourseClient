@@ -77,6 +77,13 @@ extension UserViewController: UITableViewDataSource {
     }
 }
 
+extension UserViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.didSelectRow(at: indexPath)
+    }
+}
+
 
 extension UserViewController: UserViewDelegate {
     func usersFetched() {

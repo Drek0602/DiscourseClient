@@ -140,10 +140,8 @@ class TopicDetailViewController: UIViewController {
         labelTopicTitle.text = viewModel.labelTopicNameText
         labelTopicPostCount.text = viewModel.labelPostsNumbers
         
-        //TODO:insert if statement for delete topic or not
         if viewModel.possibleDeleteTopic {
             showDeleteOption()
-            //needs to be checked if this works..
         }
         
     }

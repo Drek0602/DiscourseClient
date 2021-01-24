@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol UserCoordinatorDelegate: class {
+    func didSelect(user: User)
+}
+
 protocol UserViewDelegate: class {
     func usersFetched()
     func errorFetchingUsers()
@@ -15,9 +19,11 @@ protocol UserViewDelegate: class {
 
 /// ViewModel representando un listado de categorías
 class UserViewModel {
+    weak var coordinatorDelegate: UserCoordinatorDelegate?
     weak var viewDelegate: UserViewDelegate?
     let userDataManager: UserDataManager
     var userViewModels: [UserCellViewModel] = []
+    
     
     init(userDataManager: UserDataManager) {
         self.userDataManager = userDataManager
@@ -25,13 +31,26 @@ class UserViewModel {
     
     
     func viewWasLoaded () {
-        fetchUsers()
+        userDataManager.fetchAllUsers { [weak self] result in
+            guard let self = self else {return}
+            
+            switch result {
+                case .success(let usersResponse):
+                    guard let unWrappedUsers = usersResponse?.users  else {return}
+                    self.userViewModels = unWrappedUsers.map({ user -> UserCellViewModel in
+                        return UserCellViewModel(user: user)
+                    })
+                    
+                    self.viewDelegate?.usersFetched()
+                    
+                case .failure(let error):
+                    print(error)
+                    self.viewDelegate?.errorFetchingUsers()
+            }
+        }
         
     }
     
-    func fetchUsers () {
-        //TODO:
-    }
     
     func numberOfSections() -> Int {
         return 1
@@ -44,6 +63,11 @@ class UserViewModel {
     func viewModel(at indexPath: IndexPath) -> UserCellViewModel? {
         guard indexPath.row < userViewModels.count else { return nil }
         return userViewModels[indexPath.row]
+    }
+    
+    func didSelectRow(at indexPath: IndexPath) {
+        guard indexPath.row < userViewModels.count else { return }
+        coordinatorDelegate?.didSelect(user: userViewModels[indexPath.row].user)
     }
 }
 

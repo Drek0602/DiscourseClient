@@ -89,6 +89,7 @@ extension TopicsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         viewModel.didSelectRow(at: indexPath)
+        print("entering didSelectRow Topics")
     }
 }
 
