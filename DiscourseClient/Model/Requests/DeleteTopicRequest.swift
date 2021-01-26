@@ -24,7 +24,7 @@ struct DeleteTopicRequest: APIRequest {
     }
     
     var path: String {
-        return "t/-/\(id).json"
+        return "/t/\(id).json"
     }
     
     var parameters: [String : String] {

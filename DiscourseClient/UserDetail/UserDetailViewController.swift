@@ -47,6 +47,17 @@ class UserDetailViewController: UIViewController {
         return usernameStackView
     }()
     
+    lazy var userUpdateButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Update Name", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .cyan
+        button.addTarget(self, action: #selector(updateNameButtonClicked), for: .touchUpInside)
+        return button
+        
+    }()
+    
     let viewModel: UserDetailViewModel
     
     init(viewModel: UserDetailViewModel) {
@@ -74,6 +85,12 @@ class UserDetailViewController: UIViewController {
             userNameStackView.topAnchor.constraint(equalTo: userIDStackView.bottomAnchor, constant: 8)
         ])
         
+        view.addSubview(userUpdateButton)
+        NSLayoutConstraint.activate([
+            userUpdateButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            userUpdateButton.topAnchor.constraint(equalTo: userNameStackView.bottomAnchor, constant: 8)
+        ])
+        
         let leftBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
         leftBarButtonItem.tintColor = .black
         navigationItem.leftBarButtonItem = leftBarButtonItem
@@ -93,6 +110,11 @@ class UserDetailViewController: UIViewController {
         showAlert(alertMessage)
     }
     
+    @objc func updateNameButtonClicked() {
+        
+    }
+
+    
     fileprivate func updateUI() {
         labelID.text = viewModel.labelUserIDText
         labelUserName.text = viewModel.labelUserNameText
@@ -108,6 +130,14 @@ extension UserDetailViewController: UserDetailViewDelegate {
     
     func errorFetchingUserDetail() {
         showErrorFetchingUserDetailAlert()
+    }
+    
+    func errorModifingUserDetail() {
+        //..
+    }
+    
+    func successModifingUserDetail() {
+        //..
     }
     
     

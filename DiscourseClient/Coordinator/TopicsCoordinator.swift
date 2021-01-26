@@ -88,7 +88,7 @@ extension TopicsCoordinator: TopicsCoordinatorDelegate {
 extension TopicsCoordinator: TopicDetailCoordinatorDelegate {
     func topicDeleted() {
         presenter.popViewController(animated: true)
-        //topicsViewModel?.newTopicWasCreated()
+        
     }
     
     func topicDetailBackButtonTapped() {

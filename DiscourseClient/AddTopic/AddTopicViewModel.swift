@@ -38,7 +38,7 @@ class AddTopicViewModel {
          Si el resultado es success, avisar al coordinator
          Si la llamada falla, avisar al viewDelegate
          */
-        dataManager.addTopic(title: title, raw:"", createdAt: "") { [weak self] result in
+        dataManager.addTopic(title: title, raw: raw, createdAt: "") { [weak self] result in
             
             guard let self = self else {return}
             

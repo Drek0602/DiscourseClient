@@ -8,8 +8,36 @@
 
 import Foundation
 
-/*struct UpdateUserNameRequest: APIRequest {
+struct UpdateUserNameRequest: APIRequest {
+    
     typealias Response = UpdateUserNameResponse
     
+    let username: String
+    let name: String
     
-}*/
+    var method: Method {
+        return .PUT
+    }
+    
+    
+    var path: String {
+        return "/users/\(username)"
+    }
+    
+    
+    var parameters: [String : String] {
+        return [:]
+    }
+    
+    
+    var body: [String : Any] {
+        return ["name": name]
+    }
+    
+    
+    var headers: [String : String] {
+        return [:]
+    }
+
+    
+}

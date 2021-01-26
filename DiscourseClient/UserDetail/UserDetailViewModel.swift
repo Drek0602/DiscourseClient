@@ -15,8 +15,8 @@ protocol UserDetailCoordinatorDelegate: class {
 protocol UserDetailViewDelegate: class {
     func userDetailFetched()
     func errorFetchingUserDetail()
-    //func errorModifingUserDetail()
-    //func successModifingUserDetail()
+    func errorModifingUserDetail()
+    func successModifingUserDetail()
 }
 
 class UserDetailViewModel {

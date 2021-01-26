@@ -25,7 +25,7 @@ class TopicDetailViewModel {
     var labelTopicIDText: String?
     var labelTopicNameText: String?
     var labelPostsNumbers: String?
-    var possibleDeleteTopic: Bool = false
+    var possibleDeleteTopic: Bool = true
 
     weak var viewDelegate: TopicDetailViewDelegate?
     weak var coordinatorDelegate: TopicDetailCoordinatorDelegate?
@@ -52,7 +52,7 @@ class TopicDetailViewModel {
                     self.possibleDeleteTopic = details.canDelete ?? false
                     
                     self.viewDelegate?.topicDetailFetched()
-                    
+            
                 case .failure(let error):
                     print(error)
                     self.viewDelegate?.errorFetchingTopicDetail()

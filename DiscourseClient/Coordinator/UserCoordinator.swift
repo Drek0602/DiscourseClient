@@ -50,15 +50,6 @@ extension UserCoordinator: UserCoordinatorDelegate {
         presenter.pushViewController(userDetailViewController, animated: false)
     }
     
-    /*func didSelect(user: User) {
-        let userDetailViewModel = UserDetailViewModel(username: user.username, userDetailDataManager: userDetailDataManager)
-        let userDetailViewController = UserDetailViewController(viewModel: userDetailViewModel)
-        userDetailViewController.title = NSLocalizedString("Details", comment: "")
-        userDetailViewModel.viewDelegate = userDetailViewController
-        userDetailViewModel.coordinatorDelegate = self
-        self.userDetailViewModel = userDetailViewModel
-        presenter.pushViewController(userDetailViewController, animated: false)
-    }*/
 }
 
 
