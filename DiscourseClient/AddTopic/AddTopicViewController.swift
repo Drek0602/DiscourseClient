@@ -66,7 +66,7 @@ class AddTopicViewController: UIViewController {
 
     @objc fileprivate func submitButtonTapped() {
         guard let text = textField.text, !text.isEmpty else { return }
-        viewModel.submitButtonTapped(title: text)
+        viewModel.submitButtonTapped(title: text,raw: "")
     }
 
     fileprivate func showErrorAddingTopicAlert() {

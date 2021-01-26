@@ -15,6 +15,7 @@ class UserViewController: UIViewController {
         let table = UITableView(frame: .zero, style: .grouped)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.dataSource = self
+        table.delegate = self
         table.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
         table.estimatedRowHeight = 100
         table.rowHeight = UITableView.automaticDimension
@@ -81,6 +82,7 @@ extension UserViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         viewModel.didSelectRow(at: indexPath)
+        print("Entering didSelectRow Users")
     }
 }
 

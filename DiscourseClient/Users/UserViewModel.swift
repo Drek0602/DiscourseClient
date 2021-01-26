@@ -9,7 +9,8 @@
 import Foundation
 
 protocol UserCoordinatorDelegate: class {
-    func didSelect(user: User)
+    //func didSelect(user: User)
+    func didSelect(username: String)
 }
 
 protocol UserViewDelegate: class {
@@ -67,7 +68,7 @@ class UserViewModel {
     
     func didSelectRow(at indexPath: IndexPath) {
         guard indexPath.row < userViewModels.count else { return }
-        coordinatorDelegate?.didSelect(user: userViewModels[indexPath.row].user)
+        coordinatorDelegate?.didSelect(username: userViewModels[indexPath.row].user.username)
     }
 }
 

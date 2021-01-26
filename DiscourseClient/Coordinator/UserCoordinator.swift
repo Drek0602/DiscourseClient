@@ -40,7 +40,17 @@ class UserCoordinator: Coordinator {
 
 
 extension UserCoordinator: UserCoordinatorDelegate {
-    func didSelect(user: User) {
+    func didSelect(username: String) {
+        let userDetailViewModel = UserDetailViewModel(username: username, userDetailDataManager: userDetailDataManager)
+        let userDetailViewController = UserDetailViewController(viewModel: userDetailViewModel)
+        userDetailViewController.title = NSLocalizedString(username, comment: "")
+        userDetailViewModel.viewDelegate = userDetailViewController
+        userDetailViewModel.coordinatorDelegate = self
+        self.userDetailViewModel = userDetailViewModel
+        presenter.pushViewController(userDetailViewController, animated: false)
+    }
+    
+    /*func didSelect(user: User) {
         let userDetailViewModel = UserDetailViewModel(username: user.username, userDetailDataManager: userDetailDataManager)
         let userDetailViewController = UserDetailViewController(viewModel: userDetailViewModel)
         userDetailViewController.title = NSLocalizedString("Details", comment: "")
@@ -48,7 +58,7 @@ extension UserCoordinator: UserCoordinatorDelegate {
         userDetailViewModel.coordinatorDelegate = self
         self.userDetailViewModel = userDetailViewModel
         presenter.pushViewController(userDetailViewController, animated: false)
-    }
+    }*/
 }
 
 

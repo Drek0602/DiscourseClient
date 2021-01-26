@@ -66,5 +66,10 @@ class DiscourseClientRemoteDataManagerImpl: DiscourseClientRemoteDataManager {
         }
     }
     
+    func updateName(username: String, name: String, completion: @escaping (Result<UserDetailResponse?, Error>) -> ()) {
+        //
+        //let request = 
+    }
+    
     
 }
