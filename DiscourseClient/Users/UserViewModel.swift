@@ -70,6 +70,13 @@ class UserViewModel {
         guard indexPath.row < userViewModels.count else { return }
         coordinatorDelegate?.didSelect(username: userViewModels[indexPath.row].user.username)
     }
+    
+    func nameUpdated() {
+        
+        viewWasLoaded()
+        
+    }
+    
 }
 
 

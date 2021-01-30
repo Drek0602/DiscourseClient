@@ -80,7 +80,7 @@ extension TopicsCoordinator: TopicsCoordinatorDelegate {
             addTopicCoordinator.finish()
             self.removeChildCoordinator(addTopicCoordinator)
             self.topicsViewModel?.newTopicWasCreated()
-            //TODO: Add reload tableview here?
+            
         }
     }
 }

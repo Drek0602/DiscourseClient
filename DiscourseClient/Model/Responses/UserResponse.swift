@@ -17,7 +17,6 @@ struct UserResponse: Codable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-
         users = try container.decode(Users.self, forKey: .users)
     }
 }
