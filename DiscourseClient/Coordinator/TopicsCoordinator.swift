@@ -88,6 +88,7 @@ extension TopicsCoordinator: TopicsCoordinatorDelegate {
 extension TopicsCoordinator: TopicDetailCoordinatorDelegate {
     func topicDeleted() {
         presenter.popViewController(animated: true)
+        //add refresh method
         
     }
     

@@ -25,7 +25,7 @@ class TopicDetailViewModel {
     var labelTopicIDText: String?
     var labelTopicNameText: String?
     var labelPostsNumbers: String?
-    var possibleDeleteTopic: Bool = true
+    var possibleDeleteTopic: Bool = false
 
     weak var viewDelegate: TopicDetailViewDelegate?
     weak var coordinatorDelegate: TopicDetailCoordinatorDelegate?

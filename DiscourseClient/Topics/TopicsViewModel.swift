@@ -38,7 +38,7 @@ class TopicsViewModel {
             
             switch result {
                 case.success(let latestTopicResponse):
-                    guard let unwrappedTopic = latestTopicResponse?.topicList?.topics else {return}
+                    guard let unwrappedTopic = latestTopicResponse?.topicList.topics else {return}
                     
                     self.topicViewModels = unwrappedTopic.map({ topic -> TopicCellViewModel in
                         return TopicCellViewModel(topic: topic)

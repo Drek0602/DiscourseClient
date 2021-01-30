@@ -57,7 +57,7 @@ final class SessionAPI {
                 }
             }
             
-            if let data = data {
+            if let data = data, !data.isEmpty {
                 do {
                     let model = try JSONDecoder().decode(T.Response.self, from: data)
                     DispatchQueue.main.async {
