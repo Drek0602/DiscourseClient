@@ -15,20 +15,23 @@ protocol UserDetailCoordinatorDelegate: class {
 protocol UserDetailViewDelegate: class {
     func userDetailFetched()
     func errorFetchingUserDetail()
-    func errorModifingUserDetail()
-    func successModifingUserDetail()
+    func errorModifiyingUserDetail()
+    func successModifiyingUserDetail()
 }
 
 class UserDetailViewModel {
 
     var labelUserIDText: String?
     var labelUserNameText: String?
+    var labelNameText: String?
+    var userNameUsingTextFieldStackViewIsHidden = true
+    var updateNameButtonIsHidden = true
     
     weak var viewDelegate: UserDetailViewDelegate?
     weak var coordinatorDelegate: UserDetailCoordinatorDelegate?
     let userDetailDataManager: UserDetailDataManager
     
-let username: String
+    let username: String
     
     init(username: String, userDetailDataManager: UserDetailDataManager) {
         self.username = username
@@ -47,6 +50,15 @@ let username: String
                 
                 self.labelUserIDText = "\(user.id)"
                 self.labelUserNameText = "\(user.username)"
+                self.labelNameText = "\(user.name)"
+                
+                if user.canEditName {
+                    self.userNameUsingTextFieldStackViewIsHidden = false
+                    self.updateNameButtonIsHidden = false
+                } else {
+                    self.userNameUsingTextFieldStackViewIsHidden = true
+                    self.updateNameButtonIsHidden = true
+                }
                 
                 self.viewDelegate?.userDetailFetched()
                 
@@ -58,6 +70,18 @@ let username: String
             
         }
         
+    }
+    
+    func updateNameButtonTapped(name: String) {
+        userDetailDataManager.updateName(username: username, name: name) { [weak self] result in
+            switch result {
+                case .success:
+                    self?.viewDelegate?.successModifiyingUserDetail()
+                case.failure(let error):
+                    print(error)
+                    self?.viewDelegate?.errorModifiyingUserDetail()
+            }
+        }
     }
    
     

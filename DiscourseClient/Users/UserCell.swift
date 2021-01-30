@@ -12,7 +12,17 @@ class UserCell: UITableViewCell {
     var viewModel: UserCellViewModel? {
         didSet {
             guard let viewModel = viewModel else { return }
-            textLabel?.text = viewModel.textLabelText
+            viewModel.viewDelegate = self
+            textLabel?.text = viewModel.userNameLabelText
+            textLabel?.text = viewModel.nameLabelText
+            imageView?.image = viewModel.avatarImage
         }
+    }
+}
+
+extension UserCell: UserCellViewModelDelegate {
+    func userAvatarImageFetched() {
+        imageView?.image = viewModel?.avatarImage
+        setNeedsLayout()
     }
 }

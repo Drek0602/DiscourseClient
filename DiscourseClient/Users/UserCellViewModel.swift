@@ -8,40 +8,37 @@
 
 import UIKit
 
-/*protocol UserCellViewModelDelegate: class {
-    func userImageFetched()
-}*/
+protocol UserCellViewModelDelegate: class {
+    func userAvatarImageFetched()
+}
 
 class UserCellViewModel {
     
-    //weak var delegate: UserCellViewModelDelegate?
-    
+    weak var viewDelegate: UserCellViewModelDelegate?
     static let imageSize = 100
     let user: User
-    var textLabelText: String?
-    //var avatarImage: UIImage?
+    var userNameLabelText: String?
+    var nameLabelText: String?
+    var avatarImage: UIImage?
     
     init(user: User) {
         self.user = user
-        self.textLabelText = user.username
-        //downloadImage()
+        self.userNameLabelText = user.username
+        self.nameLabelText = user.name
         
-    }
-    
-
-    /*func downloadImage () {
-        let replacedURL: String = user.avatarTemplate.replacingOccurrences(of: "{size}", with: "\(UserCellViewModel.imageSize)")
-        
-        if let imageURL = URL(string: "\(apiURL)\(replacedURL)") {
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                guard let data = try? Data(contentsOf: imageURL),
-                      let image = UIImage(data: data) else {return}
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let imageStringURL = user.avatarTemplate.replacingOccurrences(of: "{size}", with: "\(UserCellViewModel.imageSize)")
+            if let imageURL = URL(string: "\(apiURL)\(imageStringURL)"), let data = try? Data(contentsOf: imageURL) {
+                let image = UIImage(data: data)
+                self?.avatarImage = image
                 
                 DispatchQueue.main.async {
-                    self?.avatarImage = image
+                    self?.viewDelegate?.userAvatarImageFetched()
+                    
                 }
+                
             }
+            
         }
-    }*/
-
+    }
 }

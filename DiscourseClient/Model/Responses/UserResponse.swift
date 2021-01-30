@@ -28,13 +28,13 @@ struct User: Codable {
     
     let id: Int
     let username: String
-    let name: String?
+    let name: String
     let avatarTemplate: String
     let email: String?
     let canEdit: Bool?
     let canEditUsername: Bool?
     let canEditEmail: Bool?
-    let canEditName: Bool?
+    let canEditName: Bool
     let ignored: Bool?
     let muted: Bool?
     
@@ -60,11 +60,11 @@ struct User: Codable {
         username = try container.decode(String.self, forKey: .username)
         avatarTemplate = try container.decode(String.self, forKey: .avatarTemplate)
         email = try container.decodeIfPresent(String.self, forKey: .email)
-        name = try container.decodeIfPresent(String.self, forKey: .name)
+        name = try container.decodeIfPresent(String.self, forKey: .name) ?? "No name"
         canEdit = try container.decodeIfPresent(Bool.self, forKey: .canEdit)
         canEditUsername = try container.decodeIfPresent(Bool.self, forKey: .canEditUsername)
         canEditEmail = try container.decodeIfPresent(Bool.self, forKey: .canEditEmail)
-        canEditName = try container.decodeIfPresent(Bool.self, forKey: .canEditName)
+        canEditName = try container.decodeIfPresent(Bool.self, forKey: .canEditName) ?? false
         ignored = try container.decodeIfPresent(Bool.self, forKey: .ignored)
         muted = try container.decodeIfPresent(Bool.self, forKey: .muted)
     }

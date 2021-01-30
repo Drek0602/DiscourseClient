@@ -22,6 +22,21 @@ class UserDetailViewController: UIViewController {
         return label
     }()
     
+    lazy var labelName: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    //if canEdit = true, use this
+    lazy var labelEditName: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.borderStyle = .line
+        return textField
+        
+    }()
+    
     lazy var userIDStackView: UIStackView = {
         let labelUserIDTitle = UILabel()
         labelUserIDTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +60,41 @@ class UserDetailViewController: UIViewController {
         usernameStackView.axis = .horizontal
         
         return usernameStackView
+    }()
+    
+    lazy var nameStackView: UIStackView = {
+        let labelNameTitle = UILabel()
+        labelNameTitle.translatesAutoresizingMaskIntoConstraints = false
+        labelNameTitle.text = NSLocalizedString("Name: ", comment: "")
+        
+        let nameStackView = UIStackView(arrangedSubviews: [labelNameTitle, labelName])
+        nameStackView.translatesAutoresizingMaskIntoConstraints = false
+        nameStackView.axis = .horizontal
+        
+        return nameStackView
+        
+    }()
+    
+    //use this if canEdit= true
+    lazy var nameEditStackView: UIStackView = {
+        let labelEditNameTitle = UILabel()
+        labelEditNameTitle.translatesAutoresizingMaskIntoConstraints = false
+        labelEditNameTitle.text = NSLocalizedString("Name: ", comment: "")
+        
+        let editNameStackView = UIStackView(arrangedSubviews: [labelEditNameTitle, labelEditName])
+        editNameStackView.translatesAutoresizingMaskIntoConstraints = false
+        editNameStackView.axis = .horizontal
+        
+        return editNameStackView
+    }()
+    
+    lazy var labelOrTextFieldStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [nameEditStackView, nameStackView])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        
+        return stackView
+        
     }()
     
     lazy var userUpdateButton: UIButton = {
@@ -85,10 +135,16 @@ class UserDetailViewController: UIViewController {
             userNameStackView.topAnchor.constraint(equalTo: userIDStackView.bottomAnchor, constant: 8)
         ])
         
+        view.addSubview(labelOrTextFieldStackView)
+        NSLayoutConstraint.activate([
+            labelOrTextFieldStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            labelOrTextFieldStackView.topAnchor.constraint(equalTo: userNameStackView.bottomAnchor, constant: 8)
+        ])
+        
         view.addSubview(userUpdateButton)
         NSLayoutConstraint.activate([
             userUpdateButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            userUpdateButton.topAnchor.constraint(equalTo: userNameStackView.bottomAnchor, constant: 8)
+            userUpdateButton.topAnchor.constraint(equalTo: labelOrTextFieldStackView.bottomAnchor, constant: 8)
         ])
         
         let leftBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
@@ -105,19 +161,45 @@ class UserDetailViewController: UIViewController {
         viewModel.backButtonTapped()
     }
     
+    @objc func updateNameButtonClicked() {
+        guard let name = labelEditName.text, !name.isEmpty else { return }
+        viewModel.updateNameButtonTapped(name: name)
+    
+    }
+    
     fileprivate func showErrorFetchingUserDetailAlert() {
         let alertMessage: String = NSLocalizedString("Error fetching user detail\nPlease try again later", comment: "")
         showAlert(alertMessage)
     }
     
-    @objc func updateNameButtonClicked() {
-        
+    fileprivate func showSuccessModifiyingUserName() {
+        let alertMessage: String = NSLocalizedString("Success, username updated", comment: "")
+        showAlert(alertMessage)
     }
-
+    
+    fileprivate func showErrorModifiyingUserName(){
+        let alertMessage: String = NSLocalizedString("Error, username could not be mofidied", comment: "")
+        showAlert(alertMessage)
+    }
+    
     
     fileprivate func updateUI() {
-        labelID.text = viewModel.labelUserIDText
-        labelUserName.text = viewModel.labelUserNameText
+        UIView.animate(withDuration: 0.20) { [weak self] in
+            guard let self = self else {return}
+            self.labelID.text = self.viewModel.labelUserIDText
+            self.labelUserName.text = self.viewModel.labelUserNameText
+            self.labelName.text = self.viewModel.labelNameText
+            
+            //check if editable or not
+            self.nameStackView.isHidden = !self.viewModel.userNameUsingTextFieldStackViewIsHidden
+            
+            self.nameEditStackView.isHidden = self.viewModel.userNameUsingTextFieldStackViewIsHidden
+            
+            self.userUpdateButton.isHidden = self.viewModel.updateNameButtonIsHidden
+            
+        }
+        
+        
         
     }
     
@@ -132,13 +214,16 @@ extension UserDetailViewController: UserDetailViewDelegate {
         showErrorFetchingUserDetailAlert()
     }
     
-    func errorModifingUserDetail() {
-        //..
+    func errorModifiyingUserDetail() {
+     showErrorModifiyingUserName()
+        
     }
     
-    func successModifingUserDetail() {
-        //..
+    func successModifiyingUserDetail() {
+        showSuccessModifiyingUserName()
     }
+    
+    
     
     
 }
