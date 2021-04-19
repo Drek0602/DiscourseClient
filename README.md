@@ -1,5 +1,7 @@
 # DiscourseClient
 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-swift.svg)](https://forthebadge.com)
+
 ## Objectives
 
 - Creation of Swift App using MVVM
